@@ -1,4 +1,5 @@
 import { Auth } from "../classes/auth.js";
+import { User } from "../classes/user.js";
 
 export async function onRegister(event) {
   event.preventDefault();
@@ -8,13 +9,31 @@ export async function onRegister(event) {
   const successMessage = document.getElementById("success-message");
 
   try {
-    await Auth.register(data);
+    const newUser = await Auth.register(data);
+    console.log("User registered:", newUser);
     successMessage.classList.remove("hidden");
   } catch (error) {
     alert(error.message);
   }
 }
 
-export function onLogin() {}
+export async function onLogin(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData.entries());
 
-export function onLogout() {}
+  try {
+    const loggedUser = await Auth.login(data);
+    // redirect to homepage
+    window.location.pathname = "/index.html";
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+export function onLogout(event) {
+  event.preventDefault();
+  Auth.logout();
+  // redirect to homepage
+  window.location.pathname = "/index.html";
+}
