@@ -17,8 +17,12 @@ export class Auth {
       }
 
       const userData = await response.json();
-      console.log("Registration successful!", userData);
-      return new User(userData.name, userData.email, userData.avatar);
+      console.log(userData);
+      return new User(
+        userData.data.name,
+        userData.data.email,
+        userData.data.avatar
+      );
     } catch (error) {
       console.error("Error during registration:", error.message);
       throw error;
@@ -35,20 +39,22 @@ export class Auth {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(`Login failed: ${error.message}`);
+        throw new Error(`Login failed: ${error.errors[0].message}`);
       }
 
-      const userData = await response.json();
-      console.log("Login successful!", userData);
-      return new User(
-        userData.name,
-        userData.email,
-        userData.avatar,
-        userData.credits
-      );
+      const { data } = await response.json();
+      const { accessToken: token, ...user } = data;
+      localStorage.token = token;
+      localStorage.user = JSON.stringify(user);
+      console.log(data);
+      return new User(data.name, data.email, data.avatar.url, data.credits);
     } catch (error) {
-      console.error("Error during login:", error);
+      console.error("Error during login:", error.message);
       throw error;
     }
+  }
+
+  static logout() {
+    localStorage.clear();
   }
 }
