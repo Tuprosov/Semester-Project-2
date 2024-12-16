@@ -44,10 +44,14 @@ export class Auth {
 
       const { data } = await response.json();
       const { accessToken: token, ...user } = data;
-      localStorage.token = token;
-      localStorage.user = JSON.stringify(user);
-      console.log(data);
-      return new User(data.name, data.email, data.avatar.url, data.credits);
+      return new User(
+        user.name,
+        user.email,
+        user.avatar.url,
+        user.avatar.alt,
+        user.credits,
+        token
+      );
     } catch (error) {
       console.error("Error during login:", error.message);
       throw error;
