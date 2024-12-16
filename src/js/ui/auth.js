@@ -24,6 +24,8 @@ export async function onLogin(event) {
 
   try {
     const loggedUser = await Auth.login(data);
+    loggedUser.saveToLocalStorage();
+    console.log(loggedUser);
     // redirect to homepage
     window.location.pathname = "/index.html";
   } catch (error) {
