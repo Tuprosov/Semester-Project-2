@@ -24,24 +24,28 @@
                 <!-- If user is logged in, show profile icon, otherwise show login/register buttons -->
                 <div class="flex items-center space-x-2">
                     <!-- If logged in -->
-                    <a href="/account/index.html" class="text-white">
+                    <a id="userAvatar" href="/account/index.html" class="text-white hidden">
                         <img src="https://via.placeholder.com/40" alt="Profile Icon" class="rounded-full w-10 h-10">
                     </a>
+                    <div id="userName" class="flex space-x-2 hidden">
+                        <span class="text-white"></span>
+                    </div>
                     <!-- If not logged in, show login/register buttons -->
-                    <div class="flex space-x-2">
-                        <a href="/login" class="text-white">Login</a>
-                        <a href="/register" class="text-white">Register</a>
+                    <div id="authBtns" class="flex space-x-2">
+                        <a href="/auth" class="text-white">Login</a>
+                        <a href="/auth/" class="text-white">Register</a>
                     </div>
                 </div>
 
                 <!-- Credits Section -->
-                <div class="text-white text-xl hover:text-blue-200 transition-colors ease-in-out">
+                <div id="userCredits"
+                    class="text-white text-xl hover:text-blue-200 transition-colors ease-in-out hidden">
                     <span class="font-bold">Available credits: 1000</span>
                 </div>
 
                 <!-- CTA Button to Create Listing -->
-                <a href="/listing/create.html"
-                    class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors ease-in-out">
+                <a id="ctaBtn" href="/listing/create.html"
+                    class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors ease-in-out hidden">
                     Create Listing
                 </a>
             </div>
