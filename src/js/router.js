@@ -5,7 +5,7 @@ export default async function router(pathname = window.location.pathname) {
     case base:
     case `${base}/index.html`:
     case "/index.html":
-      await import("./js/api/read.js");
+      await import("./ui/home.js");
       break;
 
     default:
