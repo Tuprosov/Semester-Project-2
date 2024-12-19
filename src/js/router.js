@@ -1,11 +1,12 @@
-import { base } from "./constants.js";
+import { loadListings } from "./ui/home.js";
 
 export default async function router(pathname = window.location.pathname) {
+  console.log("router running");
   switch (pathname) {
-    case base:
-    case `${base}/index.html`:
+    // case base:
+    // case `${base}/index.html`:
     case "/index.html":
-      await import("./ui/home.js");
+      await loadListings();
       break;
 
     default:
