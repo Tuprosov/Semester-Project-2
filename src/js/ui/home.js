@@ -9,5 +9,3 @@ export async function loadListings(page = 1) {
   displayListings(listings.data);
   pagination(listings.meta);
 }
-
-await loadListings();
