@@ -6,9 +6,11 @@ export function initializeEvents() {
   registerEvent();
   loginEvent();
   logoutEvent();
-  document
-    .getElementById("searchInput")
-    .addEventListener("keypress", (event) => {
+
+  const input = document.getElementById("searchInput");
+  if (input) {
+    input.addEventListener("keypress", (event) => {
       if (event.key === "Enter") performSearch();
     });
+  }
 }
