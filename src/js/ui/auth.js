@@ -1,5 +1,4 @@
 import { Auth } from "../classes/auth.js";
-import { User } from "../classes/user.js";
 
 export async function onRegister(event) {
   event.preventDefault();
