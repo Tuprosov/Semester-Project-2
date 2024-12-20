@@ -17,7 +17,6 @@ export class Auth {
       }
 
       const userData = await response.json();
-      console.log(userData);
       return new User(
         userData.data.name,
         userData.data.email,
