@@ -104,46 +104,47 @@
     <!-- Breadcrumb Navigation -->
     <div class="container mx-auto my-4">
         <nav class="text-sm text-blue-600">
-            <a href="index.html" class="hover:underline">Home</a> > <a href="#" class="hover:underline">Listing</a>
+            <a href="/index.html" class="hover:underline">Home</a> > <a href="#" class="hover:underline">Listing</a>
         </nav>
     </div>
 
     <!-- Main Content -->
-    <main class="container mx-auto flex flex-grow flex-wrap md:flex-nowrap gap-8 px-4">
+    <main id="container" class="container mx-auto flex flex-grow flex-wrap md:flex-nowrap gap-8 px-4">
         <!-- Media Gallery -->
-        <div class="w-full md:w-1/2">
+        <div id="listingGallery" class="w-full md:w-1/2">
             <div class="relative">
                 <!-- Slider Container -->
                 <div class="overflow-hidden rounded-lg border border-gray-200">
-                    <div id="gallery-slider" class="flex transition-transform">
-                        <img src="https://via.placeholder.com/500" alt="Listing Image 1" class="w-full">
-                        <img src="https://via.placeholder.com/500" alt="Listing Image 2" class="w-full">
-                        <video controls class="w-full">
-                            <source src="sample-video.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                    <div id="gallery-slider" class="flex">
+                        <!-- <img src="https://via.placeholder.com/500" alt="Listing Image 1"
+                            class="slide w-full flex-shrink-0">
+                        <img src="https://via.placeholder.com/500" alt="Listing Image 2"
+                            class="slide w-full flex-shrink-0">
+                        <img src="https://via.placeholder.com/500" alt="Listing Image 3"
+                            class="slide w-full flex-shrink-0"> -->
                     </div>
                 </div>
                 <!-- Slider Controls -->
                 <button id="prev-slide"
-                    class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75">◀</button>
+                    class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 z-10">◀</button>
                 <button id="next-slide"
-                    class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75">▶</button>
+                    class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 z-10">▶</button>
             </div>
         </div>
 
         <!-- Info Card -->
-        <div class="w-full md:w-1/2">
-            <div class="bg-white shadow-lg rounded-lg p-6">
-                <h1 class="text-3xl font-bold mb-4">Listing Title</h1>
-                <p class="text-gray-700 mb-4">
+        <div id="listingInfo" class="w-full md:w-1/2">
+            <div id="infoWrapper" class="bg-white shadow-lg rounded-lg p-6">
+                <h1 id="listingTitle" class="text-3xl font-bold mb-4">Listing Title</h1>
+                <p id="listingDesc" class="text-gray-700 mb-4">
                     This is a detailed description of the listing. It contains all relevant information about the
                     product or service being auctioned.
                 </p>
-                <p class="text-gray-500 text-sm mb-2">Deadline: <span class="font-semibold">2024-12-31</span></p>
+                <p id="listingDeadline" class="text-gray-500 text-sm mb-4">Deadline: <span
+                        class="font-semibold">2024-12-31</span></p>
 
                 <!-- Total Bids -->
-                <p class="text-gray-500 text-sm mb-2">
+                <p id="listingBids" class="text-gray-500 text-sm mb-4">
                     Total Bids:
                     <button id="show-bids" class="text-blue-600 hover:underline font-semibold">
                         25
@@ -151,24 +152,26 @@
                 </p>
 
                 <!-- Current Max Bid -->
-                <p class="text-gray-500 text-sm mb-4">
+                <p id="listingMaxBid" class="text-gray-500 text-sm mb-4">
                     Current Max Bid: <span class="font-semibold">$500</span>
                 </p>
 
                 <!-- Seller -->
-                <a href="/seller-profile" class="text-blue-600 hover:underline text-sm mb-6 inline-block">Seller: John
+                <a id="listingOwner" href="/seller-profile"
+                    class="text-blue-600 hover:underline text-sm mb-4 inline-block">Seller: John
                     Doe</a>
 
                 <!-- Bid Section -->
-                <div class="flex items-center mb-6">
-                    <input type="number" placeholder="Enter your bid"
+                <div class="flex items-center mb-4">
+                    <input id="bidInput" type="number" placeholder="Enter your bid"
                         class="border border-gray-300 rounded-l-md px-4 py-2 w-40 focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         min="501" required>
-                    <button
+                    <button id="placeBidBtn"
                         class="bg-blue-500 text-white px-6 py-2 rounded-r-md hover:bg-blue-600 transition-colors ease-in-out">
                         Place Bid
                     </button>
                 </div>
+                <p id="bidMessage" class="text-sm text-red-500 hidden">You must be logged in to bid on the listing.</p>
 
                 <!-- Add to Watchlist -->
                 <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md w-full text-center">
@@ -201,24 +204,6 @@
         </div>
     </footer>
 
-    <script>
-        // JavaScript for Slider Controls
-        const slider = document.getElementById('gallery-slider');
-        const nextSlide = document.getElementById('next-slide');
-        const prevSlide = document.getElementById('prev-slide');
-
-        let slideIndex = 0;
-
-        nextSlide.addEventListener('click', () => {
-            slideIndex = (slideIndex + 1) % slider.children.length;
-            slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-        });
-
-        prevSlide.addEventListener('click', () => {
-            slideIndex = (slideIndex - 1 + slider.children.length) % slider.children.length;
-            slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-        });
-    </script>
     <script>
         document.getElementById("show-bids").addEventListener("click", function () {
             const bidsList = document.getElementById("bids-list");
