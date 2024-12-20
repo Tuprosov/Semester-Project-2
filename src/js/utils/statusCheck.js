@@ -1,9 +1,8 @@
 import { User } from "../classes/user.js";
-import { displayUserDetails } from "./displayUser.js";
 
 export function checkStatus() {
   if (!User.isLoggedIn()) {
-    return;
+    return false;
   }
-  displayUserDetails(User.loggedUser);
+  return true;
 }
