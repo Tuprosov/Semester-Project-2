@@ -45,6 +45,7 @@ export class API {
     const url = new URL(this.baseURL);
     url.searchParams.append("limit", limit);
     url.searchParams.append("page", page);
+    url.searchParams.append("_active", true);
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -114,6 +115,26 @@ export class API {
       return { message: "Listing deleted successfully" };
     } catch (error) {
       console.error("Error deleting listing:", error);
+    }
+  }
+  //   place bid
+  async placeBid(id, bidAmount) {
+    try {
+      const response = await fetch(`${this.baseURL}/${id}/bids`, {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify({ amount: bidAmount }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.errors.message || "Failed to place the bid.");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error placing bid:", error);
+      throw error;
     }
   }
 }
