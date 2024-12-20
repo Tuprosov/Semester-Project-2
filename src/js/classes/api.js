@@ -64,7 +64,7 @@ export class API {
   // Get a specific listing by ID
   async getListingById(id) {
     try {
-      const response = await fetch(`${this.baseURL}${id}`, {
+      const response = await fetch(`${this.baseURL}/${id}`, {
         method: "GET",
         headers: headers(),
       });
