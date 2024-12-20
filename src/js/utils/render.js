@@ -40,6 +40,7 @@ export function displayListings(data) {
       img.alt = listing.media[0].alt;
     }
     p2.textContent = `Deadline: ${listing.endsAt}`;
+    a.href = `/listing/index.html?id=${listing.id}`;
 
     div.append(h3, p2);
     a.append(img, div);
@@ -94,4 +95,43 @@ export function pagination(meta) {
   paginationContainer.appendChild(pageInfo);
   paginationContainer.appendChild(nextButton);
   wrapper.appendChild(paginationContainer);
+}
+
+export function displaySingleListing(listing) {
+  const title = document.getElementById("listingTitle");
+  const desc = document.getElementById("listingDesc");
+  const deadline = document.getElementById("listingDeadline");
+  const showBids = document.getElementById("show-bids");
+  const maxBid = document.getElementById("listingMaxBid");
+  const owner = document.getElementById("listingOwner");
+  const carousel = document.getElementById("gallery-slider");
+
+  title.textContent = listing.title;
+  desc.textContent = listing.description;
+  deadline.textContent = `Deadline: ${listing.endsAt}`;
+  showBids.textContent = Array.isArray(listing.bids) ? listing.bids.length : 0;
+  maxBid.textContent = `Current max bid: ${
+    listing.bids?.length
+      ? `${Math.max(...listing.bids.map((bid) => bid.amount))} USD`
+      : "Not available"
+  }`;
+
+  // check if seller exists, if yes display, otherwise disable the link
+  if (listing.seller) {
+    owner.textContent = `Seller: ${listing.seller.name}`;
+  } else {
+    owner.textContent = "Seller: Not available";
+    owner.href = "#";
+    owner.style.textDecoration = "none";
+  }
+
+  //create as many slides as media of the listing
+  listing.media.forEach((obj) => {
+    const img = document.createElement("img");
+    img.className = "slide w-full flex-shrink-0";
+    img.src = obj.url;
+    img.alt = obj.alt;
+    // append to carousel container
+    carousel.appendChild(img);
+  });
 }
