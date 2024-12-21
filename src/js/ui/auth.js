@@ -1,4 +1,7 @@
 import { Auth } from "../classes/auth.js";
+import { API } from "../classes/api.js";
+import { API_PROFILE_BASE } from "../constants.js";
+import { User } from "../classes/user.js";
 
 export async function onRegister(event) {
   event.preventDefault();
@@ -19,16 +22,33 @@ export async function onRegister(event) {
 export async function onLogin(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
-  const data = Object.fromEntries(formData.entries());
+  const loginData = Object.fromEntries(formData.entries());
 
   try {
-    const loggedUser = await Auth.login(data);
+    const user = await Auth.login(loginData);
+    localStorage.setItem("token", JSON.stringify(user.token));
+    const api = new API(API_PROFILE_BASE);
+    const profile = await api.getProfile(user.username);
+
+    // create on loggeduser object from 2 objects
+    const loggedUser = new User(
+      user.username,
+      user.email,
+      user.avatar,
+      user.alt,
+      user.token,
+      profile.credits,
+      profile.listings,
+      profile.wins,
+      user.bids,
+      user.watchlist
+    );
     loggedUser.saveToLocalStorage();
-    console.log(loggedUser);
+
     // redirect to homepage
     window.location.pathname = "/index.html";
   } catch (error) {
-    alert(error.message);
+    console.error(error.message);
   }
 }
 
