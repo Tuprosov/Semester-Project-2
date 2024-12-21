@@ -7,15 +7,16 @@ export async function onRegister(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const data = Object.fromEntries(formData.entries());
-
-  const successMessage = document.getElementById("success-message");
+  const successMessage = document.getElementById("success-message-reg");
+  const failureMessage = document.getElementById("failure-message-reg");
 
   try {
     const newUser = await Auth.register(data);
     console.log("User registered:", newUser);
     successMessage.classList.remove("hidden");
   } catch (error) {
-    alert(error.message);
+    failureMessage.classList.remove("hidden");
+    console.error(error.message);
   }
 }
 
@@ -23,6 +24,7 @@ export async function onLogin(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const loginData = Object.fromEntries(formData.entries());
+  const failureMessage = document.getElementById("failure-message-login");
 
   try {
     const user = await Auth.login(loginData);
@@ -48,6 +50,7 @@ export async function onLogin(event) {
     // redirect to homepage
     window.location.pathname = "/index.html";
   } catch (error) {
+    failureMessage.classList.remove("hidden");
     console.error(error.message);
   }
 }
