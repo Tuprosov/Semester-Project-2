@@ -1,7 +1,11 @@
 // import all event handlers here
 import { loginEvent, registerEvent, logoutEvent } from "./auth.js";
 import { searchEvent } from "./search.js";
-import { placeBidEvent } from "./listing.js";
+import {
+  placeBidEvent,
+  createListingEvent,
+  AddMediaUrlEvent,
+} from "./listing.js";
 
 export function initializeEvents() {
   registerEvent();
@@ -9,4 +13,6 @@ export function initializeEvents() {
   logoutEvent();
   searchEvent();
   placeBidEvent();
+  createListingEvent();
+  AddMediaUrlEvent();
 }
