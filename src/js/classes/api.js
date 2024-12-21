@@ -37,6 +37,7 @@ export class API {
       return data;
     } catch (error) {
       console.error("Error creating listing:", error);
+      throw error;
     }
   }
 
