@@ -110,7 +110,6 @@ export function displaySingleListing(listing) {
   const owner = document.getElementById("listingOwner");
   const carousel = document.getElementById("gallery-slider");
   const watchlistBtn = document.getElementById("addToWatchlist");
-  console.log(listing.bids.length);
 
   title.textContent = listing.title;
   desc.textContent = listing.description;
