@@ -12,9 +12,17 @@
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <!-- Message Block -->
-        <div id="success-message"
+        <div id="success-message-reg"
             class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
             Registration successful! Login to your account.
+        </div>
+        <div id="failure-message-reg"
+            class="hidden bg-green-100 border border-green-400 text-red-700 px-4 py-3 rounded mb-4">
+            Registration failed! Please try again.
+        </div>
+        <div id="failure-message-login"
+            class="hidden bg-green-100 border border-green-400 text-red-700 px-4 py-3 rounded mb-4">
+            Something went wrong! Check your input and try again.
         </div>
         <div class="flex border-b mb-6">
             <button id="login-tab" class="flex-1 text-center py-2 text-blue-500 border-b-2 border-blue-500"
