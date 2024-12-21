@@ -6,6 +6,7 @@ export class User {
     alt = null,
     token,
     credits = 0,
+    bio,
     listings = [],
     wins = [],
     bids = [],
@@ -21,6 +22,7 @@ export class User {
     this.watchlist = watchlist; // An array to store the listings the user is watching
     this.listings = listings;
     this.wins = wins;
+    this.bio = bio;
   }
 
   static get loggedUser() {
