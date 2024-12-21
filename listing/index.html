@@ -15,7 +15,7 @@
     <header class="bg-blue-500 py-4">
         <div class="container mx-auto flex justify-between items-center px-4">
             <!-- Site Name -->
-            <div class="text-white text-2xl font-bold">AuctionSite</div>
+            <div class="text-white text-2xl font-bold"><a href="/index.html">AuctionSite</a></div>
 
             <!-- Auth/Profile Area -->
             <div class="flex items-center space-x-4">
@@ -171,10 +171,12 @@
                         Place Bid
                     </button>
                 </div>
-                <p id="bidMessage" class="text-sm text-red-500 hidden">You must be logged in to bid on the listing.</p>
+                <p id="bidMessage" class="text-sm text-red-500 hidden">You must be logged in to bid on the listing and
+                    view other info</p>
 
                 <!-- Add to Watchlist -->
-                <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md w-full text-center">
+                <button id="addToWatchlist"
+                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md w-full text-center">
                     Add to Watchlist
                 </button>
             </div>
@@ -182,10 +184,7 @@
             <!-- Hidden Bids List -->
             <div id="bids-list" class="bg-gray-100 border border-gray-300 rounded-lg p-4 mt-4 hidden">
                 <h2 class="text-xl font-semibold mb-4">Bids:</h2>
-                <ul class="list-disc pl-6">
-                    <li><a href="/bidder-profile" class="text-blue-600 hover:underline">Alice</a> - $490</li>
-                    <li><a href="/bidder-profile" class="text-blue-600 hover:underline">Bob</a> - $470</li>
-                    <li><a href="/bidder-profile" class="text-blue-600 hover:underline">Charlie</a> - $450</li>
+                <ul id="biddersContainer" class="list-disc pl-6">
                 </ul>
             </div>
         </div>
