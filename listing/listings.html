@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User listings</title>
+    <link rel="stylesheet" href="../src/css/style.css">
+    <script type="module" src="../src/index.js"></script>
+</head>
+
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-blue-500 py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <!-- Site Name -->
+            <div class="text-white text-2xl font-bold"><a href="/index.html">AuctionSite</a></div>
+
+            <!-- Auth/Profile Area -->
+            <div class="flex items-center space-x-4">
+                <!-- Search Bar -->
+                <input id="searchInput" type="text" placeholder="Search..."
+                    class="px-4 py-2 w-48 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+                <!-- If user is logged in, show profile icon, otherwise show login/register buttons -->
+                <div class="flex items-center space-x-2">
+                    <!-- If logged in -->
+                    <a id="userAvatar" href="/account/index.html" class="text-white hidden">
+                        <img src="https://via.placeholder.com/40" alt="Profile Icon" class="rounded-full w-10 h-10">
+                    </a>
+                    <div id="userName" class="flex space-x-2 hidden">
+                        <span class="text-white"></span>
+                    </div>
+                    <!-- If not logged in, show login/register buttons -->
+                    <div id="authBtns" class="flex space-x-2">
+                        <a href="/auth" class="text-white">Login</a>
+                        <a href="/auth/" class="text-white">Register</a>
+                    </div>
+                </div>
+
+                <!-- Credits Section -->
+                <div id="userCredits"
+                    class="text-white text-xl hover:text-blue-200 transition-colors ease-in-out hidden">
+                    <span class="font-bold">Available credits: 1000</span>
+                </div>
+
+                <!-- CTA Button to Create Listing -->
+                <a id="ctaBtn" href="/listing/create.html"
+                    class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors ease-in-out hidden">
+                    Create Listing
+                </a>
+            </div>
+        </div>
+        <nav class="bg-blue-500">
+            <ul class="container mx-auto flex space-x-4 px-4 py-2 text-white relative">
+                <!-- Electronics Dropdown -->
+                <li class="relative group">
+                    <a href="#" class="hover:text-blue-200">Electronics</a>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:flex flex-col bg-blue-600 p-2 rounded-md shadow-lg z-10">
+                        <a href="/categories/phones" class="block px-4 py-2 hover:bg-blue-700">Phones</a>
+                        <a href="/categories/laptops" class="block px-4 py-2 hover:bg-blue-700">Laptops</a>
+                        <a href="/categories/cameras" class="block px-4 py-2 hover:bg-blue-700">Cameras</a>
+                    </div>
+                </li>
+
+                <!-- Home & Garden Dropdown -->
+                <li class="relative group">
+                    <a href="#" class="hover:text-blue-200">Home and Garden</a>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:flex flex-col bg-blue-600 p-2 rounded-md shadow-lg z-10">
+                        <a href="/categories/furniture" class="block px-4 py-2 hover:bg-blue-700">Furniture</a>
+                        <a href="/categories/kitchen" class="block px-4 py-2 hover:bg-blue-700">Kitchen</a>
+                        <a href="/categories/decor" class="block px-4 py-2 hover:bg-blue-700">Decor</a>
+                    </div>
+                </li>
+
+                <!-- Fashion Dropdown -->
+                <li class="relative group">
+                    <a href="#" class="hover:text-blue-200">Fashion</a>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:flex flex-col bg-blue-600 p-2 rounded-md shadow-lg z-10">
+                        <a href="/categories/men" class="block px-4 py-2 hover:bg-blue-700">Men</a>
+                        <a href="/categories/women" class="block px-4 py-2 hover:bg-blue-700">Women</a>
+                        <a href="/categories/accessories" class="block px-4 py-2 hover:bg-blue-700">Accessories</a>
+                    </div>
+                </li>
+
+                <!-- More Dropdown -->
+                <li class="relative group">
+                    <a href="#" class="hover:text-blue-200">More</a>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:flex flex-col bg-blue-600 p-2 rounded-md shadow-lg z-10">
+                        <a href="/categories/sports" class="block px-4 py-2 hover:bg-blue-700">Sports</a>
+                        <a href="/categories/automotive" class="block px-4 py-2 hover:bg-blue-700">Automotive</a>
+                        <a href="/categories/books" class="block px-4 py-2 hover:bg-blue-700">Books</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="container" class="container mx-auto flex-grow p-4">
+        <h1 id="h1" class="text-xl font-bold text-gray-800 mb-4">Your Listings</h1>
+        <!-- fetched eleements go here -->
+        <div id="contentWrapper"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white">
+        <div class="container mx-auto p-4 flex justify-between">
+            <div>
+                <h3 class="text-lg font-bold">About Us</h3>
+                <p class="text-sm">Learn more about our platform and team.</p>
+                <h3 class="text-lg font-bold mt-4">Help</h3>
+                <p class="text-sm">Find answers to common questions.</p>
+            </div>
+            <div class="text-lg font-bold">Auction Website</div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
