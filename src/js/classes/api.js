@@ -64,8 +64,13 @@ export class API {
 
   // Get a specific listing by ID
   async getListingById(id) {
+    const url = new URL(this.baseURL);
+    const newUrl = new URL(`${url}/${id}`);
+    newUrl.searchParams.append("_seller", true);
+    newUrl.searchParams.append("_bids", true);
+
     try {
-      const response = await fetch(`${this.baseURL}/${id}`, {
+      const response = await fetch(newUrl, {
         method: "GET",
         headers: headers(),
       });
@@ -135,6 +140,28 @@ export class API {
     } catch (error) {
       console.error("Error placing bid:", error);
       throw error;
+    }
+  }
+  //   get profile
+  async getProfile(name) {
+    const url = new URL(this.baseURL);
+    const newUrl = new URL(`${url}/${name}`);
+    newUrl.searchParams.append("_wins", true);
+    newUrl.searchParams.append("_listings", true);
+
+    try {
+      const response = await fetch(newUrl, {
+        method: "GET",
+        headers: headers(),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch the profile");
+      }
+
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      console.error("Error fetching profile:", error);
     }
   }
 }
