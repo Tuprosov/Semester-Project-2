@@ -38,7 +38,6 @@ export async function onCreate(event) {
   } else {
     try {
       const newListing = await api.createListing(data);
-      console.log("Listing created:", newListing);
       message.textContent = "Your listing is published";
       message.classList.remove("hidden");
       // redirect to listing
