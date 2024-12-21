@@ -40,7 +40,6 @@ export class Auth {
         const error = await response.json();
         throw new Error(`Login failed: ${error.errors[0].message}`);
       }
-
       const { data } = await response.json();
       const { accessToken: token, ...user } = data;
       return new User(
@@ -48,7 +47,6 @@ export class Auth {
         user.email,
         user.avatar.url,
         user.avatar.alt,
-        user.credits,
         token
       );
     } catch (error) {
