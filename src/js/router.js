@@ -6,6 +6,7 @@ import {
   displayBidders,
   displayAccount,
 } from "./utils/render.js";
+import { fetchProfile } from "./ui/account.js";
 
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
@@ -24,6 +25,7 @@ export default async function router(pathname = window.location.pathname) {
       await displayProfile();
     case "/account/index.html":
       displayAccount();
+      fetchProfile();
     default:
       break;
   }
