@@ -1,4 +1,8 @@
 import { loadListings } from "../ui/home.js";
+import { API } from "../classes/api.js";
+import { API_PROFILE_BASE } from "../constants.js";
+import { checkStatus } from "./statusCheck.js";
+import { User } from "../classes/user.js";
 
 export function displayListings(data) {
   const wrapper = document.getElementById("contentWrapper");
@@ -105,20 +109,31 @@ export function displaySingleListing(listing) {
   const maxBid = document.getElementById("listingMaxBid");
   const owner = document.getElementById("listingOwner");
   const carousel = document.getElementById("gallery-slider");
+  const watchlistBtn = document.getElementById("addToWatchlist");
+  console.log(listing.bids.length);
 
   title.textContent = listing.title;
   desc.textContent = listing.description;
   deadline.textContent = `Deadline: ${listing.endsAt}`;
   showBids.textContent = Array.isArray(listing.bids) ? listing.bids.length : 0;
+  showBids.disabled = listing.bids.length == 0 ? true : false;
   maxBid.textContent = `Current max bid: ${
     listing.bids?.length
-      ? `${Math.max(...listing.bids.map((bid) => bid.amount))} USD`
+      ? Math.max(...listing.bids.map((bid) => bid.amount))
       : "Not available"
   }`;
 
   // check if seller exists, if yes display, otherwise disable the link
   if (listing.seller) {
     owner.textContent = `Seller: ${listing.seller.name}`;
+    // disable/hide buttons if not logged in
+    if (checkStatus()) {
+      owner.href = `/profile/index.html?name=${listing.seller.name}`;
+    } else {
+      owner.href = "#";
+      owner.style.pointerEvents = "none";
+      watchlistBtn.style.display = "none";
+    }
   } else {
     owner.textContent = "Seller: Not available";
     owner.href = "#";
@@ -134,4 +149,83 @@ export function displaySingleListing(listing) {
     // append to carousel container
     carousel.appendChild(img);
   });
+}
+
+export function displayHeaderDetails(user) {
+  const avatar = document.getElementById("userAvatar");
+  const credits = document.getElementById("userCredits");
+  const cta = document.getElementById("ctaBtn");
+  const auth = document.getElementById("authBtns");
+  const name = document.getElementById("userName");
+
+  avatar.firstElementChild.src =
+    user.avatar || "https://via.placeholder.com/40";
+  avatar.firstElementChild.alt = user.alt;
+  credits.firstElementChild.textContent = `Credits:${user.credits}`;
+  name.firstElementChild.textContent = user.username;
+  cta.classList.remove("hidden");
+  auth.classList.add("hidden");
+  name.classList.remove("hidden");
+  credits.classList.remove("hidden");
+  avatar.classList.remove("hidden");
+}
+
+export async function displayProfile() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const profileName = urlParams.get("name");
+
+  const api = new API(API_PROFILE_BASE);
+  const profile = await api.getProfile(profileName);
+
+  const banner = document.getElementById("profileBanner");
+  const avatar = document.getElementById("profileAvatar");
+  const name = document.getElementById("profileName");
+  const email = document.getElementById("profileEmail");
+  const bioDesc = document.getElementById("profileBioDesc");
+
+  banner.src = profile.banner.url;
+  banner.alt = profile.banner.alt;
+  avatar.src = profile.avatar.url;
+  avatar.style.maxWidth = "50%";
+  avatar.alt = profile.avatar.alt;
+  name.textContent = profile.name;
+  email.textContent = profile.email;
+  bioDesc.textContent = profile.bio ? profile.bio : " profile bio goes here";
+}
+
+export function displayBidders() {
+  const bids = JSON.parse(localStorage.getItem("current listing")).bids;
+  const biddersContainer = document.getElementById("biddersContainer");
+
+  bids.forEach((bid) => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = `/profile/index.html?name=${bid.bidder.name}`;
+    a.textContent = `${bid.bidder.name} - ${bid.amount}`;
+    a.className = "text-blue-600 hover:underline";
+    // append it to container
+    li.appendChild(a);
+    biddersContainer.appendChild(li);
+  });
+}
+
+export function displayAccount() {
+  const username = document.getElementById("username");
+  const fullname = document.getElementById("fullname");
+  const accountId = document.getElementById("bidderID");
+  const email = document.getElementById("email");
+  const phone = document.getElementById("phone");
+  const avatar = document.getElementById("avatar");
+  // get logged user from localstorage
+  const loggedUser = User.loggedUser;
+
+  username.textContent = loggedUser.username;
+  fullname.textContent = loggedUser.fullname
+    ? loggedUser.fullname
+    : loggedUser.username;
+  accountId.textContent = loggedUser.id ? loggedUser.id : "no ID";
+  email.textContent = loggedUser.email;
+  phone.textContent = loggedUser.phone ? loggedUser.phone : "no phone";
+  avatar.url = loggedUser.avatar;
+  avatar.alt = loggedUser.alt;
 }
