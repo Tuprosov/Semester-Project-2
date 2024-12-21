@@ -1,6 +1,7 @@
 import { loadListings } from "./ui/home.js";
 import { getClickedListing, toggleBidSection } from "./ui/listing.js";
 import { initializeSlider } from "./utils/carousel.js";
+import { displayProfile, displayBidders } from "./utils/render.js";
 
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
@@ -13,7 +14,10 @@ export default async function router(pathname = window.location.pathname) {
       await getClickedListing();
       initializeSlider();
       toggleBidSection();
+      displayBidders();
       break;
+    case "/profile/index.html":
+      await displayProfile();
     default:
       break;
   }
