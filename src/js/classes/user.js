@@ -4,8 +4,12 @@ export class User {
     email,
     avatar = null,
     alt = null,
-    credits = 1000,
-    token
+    token,
+    credits = 0,
+    listings = [],
+    wins = [],
+    bids = [],
+    watchlist = []
   ) {
     this.username = username;
     this.email = email;
@@ -13,8 +17,10 @@ export class User {
     this.alt = alt;
     this.credits = credits;
     this.token = token;
-    this.bids = []; // An array to store bids made by the user
-    this.watchlist = []; // An array to store the listings the user is watching
+    this.bids = bids; // An array to store bids made by the user
+    this.watchlist = watchlist; // An array to store the listings the user is watching
+    this.listings = listings;
+    this.wins = wins;
   }
 
   static get loggedUser() {
