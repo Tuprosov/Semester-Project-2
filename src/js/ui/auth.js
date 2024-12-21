@@ -40,6 +40,7 @@ export async function onLogin(event) {
       user.alt,
       user.token,
       profile.credits,
+      profile.bio,
       profile.listings,
       profile.wins,
       user.bids,
