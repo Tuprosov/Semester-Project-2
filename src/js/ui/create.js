@@ -10,34 +10,45 @@ export async function onCreate(event) {
   const tagsArray = tagsInput.split(",").map((tag) => tag.trim());
   data.tags = tagsArray;
   const mediaUrls = formData.getAll("media");
-  const mediaItems = [];
+  const validMedia = [];
+  const invalidMedia = [];
   const message = document.getElementById("message");
 
-  mediaUrls.forEach((url) => {
+  mediaUrls.forEach((url, index) => {
     if (url.length > 300) {
-      message.textContent = "Url character is too long!";
-      message.classList.remove("hidden");
+      invalidMedia.push(index + 1);
     } else {
-      mediaItems.push({
+      validMedia.push({
         url: url,
         alt: "",
       });
     }
   });
-  data.media = mediaItems;
 
-  try {
-    const newListing = await api.createListing(data);
-    console.log("Listing created:", newListing);
-    message.textContent = "Your listing is published";
+  data.media = validMedia;
+  //   invalidMedia.push(...mediaUrls.filter((url) => url.length > 300));
+  //   const validMedia = mediaUrls.filter((url) => url.length < 300);
+  //   data.media = validMedia.map((url) => ({ url: url, alt: "" }));
+
+  if (invalidMedia.length > 0) {
+    message.textContent = `Too long URL in input fields ${invalidMedia.join(
+      ","
+    )}`;
     message.classList.remove("hidden");
-    // redirect to listing
-    if (newListing.data.id) {
-      window.location.href = `/listing/index.html?id=${newListing.data.id}`;
+  } else {
+    try {
+      const newListing = await api.createListing(data);
+      console.log("Listing created:", newListing);
+      message.textContent = "Your listing is published";
+      message.classList.remove("hidden");
+      // redirect to listing
+      if (newListing.data.id) {
+        window.location.href = `/listing/index.html?id=${newListing.data.id}`;
+      }
+    } catch (error) {
+      message.textContent = "Something went wrong, please try again";
+      message.classList.remove("hidden");
+      console.log(error.message);
     }
-  } catch (error) {
-    message.textContent = "Something went wrong, please try again";
-    message.classList.remove("hidden");
-    console.log(error.message);
   }
 }
