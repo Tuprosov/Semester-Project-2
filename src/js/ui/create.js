@@ -6,21 +6,25 @@ export async function onCreate(event) {
   const api = new API(API_BASE);
   const formData = new FormData(event.target);
   const data = Object.fromEntries(formData.entries());
-  console.log(data);
   const tagsInput = data.tags || "";
   const tagsArray = tagsInput.split(",").map((tag) => tag.trim());
   data.tags = tagsArray;
   const mediaUrls = formData.getAll("media");
   const mediaItems = [];
+  const message = document.getElementById("message");
 
   mediaUrls.forEach((url) => {
-    mediaItems.push({
-      url: url,
-      alt: "",
-    });
+    if (url.length > 300) {
+      message.textContent = "Url character is too long!";
+      message.classList.remove("hidden");
+    } else {
+      mediaItems.push({
+        url: url,
+        alt: "",
+      });
+    }
   });
   data.media = mediaItems;
-  const message = document.getElementById("message");
 
   try {
     const newListing = await api.createListing(data);
