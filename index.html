@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auction Website</title>
     <link rel="stylesheet" href="src/css/style.css">
-    <script type="module" src="./src/index.js"></script>
+    <script type="module" src="src/index.js"></script>
 </head>
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -15,7 +15,7 @@
     <header class="bg-blue-500 py-4">
         <div class="container mx-auto flex justify-between items-center px-4">
             <!-- Site Name -->
-            <div class="text-white text-2xl font-bold"><a href="Semester-Project-2/index.html">AuctionSite</a></div>
+            <div class="text-white text-2xl font-bold"><a href="index.html">AuctionSite</a></div>
 
             <!-- Auth/Profile Area -->
             <div class="flex items-center space-x-4">
@@ -26,7 +26,7 @@
                 <!-- If user is logged in, show profile icon, otherwise show login/register buttons -->
                 <div class="flex items-center space-x-2">
                     <!-- If logged in -->
-                    <a id="userAvatar" href="/account/index.html" class="text-white hidden">
+                    <a id="userAvatar" href="./account/index.html" class="text-white hidden">
                         <img src="https://via.placeholder.com/40" alt="Profile Icon" class="rounded-full w-10 h-10">
                     </a>
                     <div id="userName" class="flex space-x-2 hidden">
@@ -34,8 +34,8 @@
                     </div>
                     <!-- If not logged in, show login/register buttons -->
                     <div id="authBtns" class="flex space-x-2">
-                        <a href="/auth" class="text-white">Login</a>
-                        <a href="/auth/" class="text-white">Register</a>
+                        <a href="./auth/index.html" class="text-white">Login</a>
+                        <a href="./auth/index.html" class="text-white">Register</a>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                 </div>
 
                 <!-- CTA Button to Create Listing -->
-                <a id="ctaBtn" href="/listing/create.html"
+                <a id="ctaBtn" href="./listing/create.html"
                     class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors ease-in-out hidden">
                     Create Listing
                 </a>
@@ -59,9 +59,9 @@
                     <a href="#" class="hover:text-blue-200">Electronics</a>
                     <div
                         class="absolute left-0 top-full hidden group-hover:flex flex-col bg-blue-600 p-2 rounded-md shadow-lg z-10">
-                        <a href="/categories/phones" class="block px-4 py-2 hover:bg-blue-700">Phones</a>
-                        <a href="/categories/laptops" class="block px-4 py-2 hover:bg-blue-700">Laptops</a>
-                        <a href="/categories/cameras" class="block px-4 py-2 hover:bg-blue-700">Cameras</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Phones</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Laptops</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Cameras</a>
                     </div>
                 </li>
 
@@ -70,9 +70,9 @@
                     <a href="#" class="hover:text-blue-200">Home and Garden</a>
                     <div
                         class="absolute left-0 top-full hidden group-hover:flex flex-col bg-blue-600 p-2 rounded-md shadow-lg z-10">
-                        <a href="/categories/furniture" class="block px-4 py-2 hover:bg-blue-700">Furniture</a>
-                        <a href="/categories/kitchen" class="block px-4 py-2 hover:bg-blue-700">Kitchen</a>
-                        <a href="/categories/decor" class="block px-4 py-2 hover:bg-blue-700">Decor</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Furniture</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Kitchen</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Decor</a>
                     </div>
                 </li>
 
@@ -81,9 +81,9 @@
                     <a href="#" class="hover:text-blue-200">Fashion</a>
                     <div
                         class="absolute left-0 top-full hidden group-hover:flex flex-col bg-blue-600 p-2 rounded-md shadow-lg z-10">
-                        <a href="/categories/men" class="block px-4 py-2 hover:bg-blue-700">Men</a>
-                        <a href="/categories/women" class="block px-4 py-2 hover:bg-blue-700">Women</a>
-                        <a href="/categories/accessories" class="block px-4 py-2 hover:bg-blue-700">Accessories</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Men</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Women</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Accessories</a>
                     </div>
                 </li>
 
@@ -92,9 +92,9 @@
                     <a href="#" class="hover:text-blue-200">More</a>
                     <div
                         class="absolute left-0 top-full hidden group-hover:flex flex-col bg-blue-600 p-2 rounded-md shadow-lg z-10">
-                        <a href="/categories/sports" class="block px-4 py-2 hover:bg-blue-700">Sports</a>
-                        <a href="/categories/automotive" class="block px-4 py-2 hover:bg-blue-700">Automotive</a>
-                        <a href="/categories/books" class="block px-4 py-2 hover:bg-blue-700">Books</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Sports</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Automotive</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-700">Books</a>
                     </div>
                 </li>
             </ul>

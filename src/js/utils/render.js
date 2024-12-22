@@ -44,7 +44,7 @@ export function displayListings(data) {
       img.alt = listing.media[0].alt;
     }
     p2.textContent = `Deadline: ${listing.endsAt}`;
-    a.href = `/listing/index.html?id=${listing.id}`;
+    a.href = `./listing/index.html?id=${listing.id}`;
 
     div.append(h3, p2);
     a.append(img, div);
@@ -127,7 +127,7 @@ export function displaySingleListing(listing) {
     owner.textContent = `Seller: ${listing.seller.name}`;
     // disable/hide buttons if not logged in
     if (checkStatus()) {
-      owner.href = `/profile/index.html?name=${listing.seller.name}`;
+      owner.href = `../profile/index.html?name=${listing.seller.name}`;
     } else {
       owner.href = "#";
       owner.style.pointerEvents = "none";
