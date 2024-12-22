@@ -167,7 +167,7 @@ export class API {
   }
 
   //  update profile
-  async updateAccount(name) {
+  async updateAccount(name, updatedData) {
     const url = new URL(this.baseURL);
     const newUrl = new URL(`${url}/${name}`);
 
@@ -175,15 +175,21 @@ export class API {
       const response = await fetch(newUrl, {
         method: "PUT",
         headers: headers(),
+        body: JSON.stringify(updatedData),
       });
       if (!response.ok) {
-        throw new Error("Failed to update the profile");
+        const data = await response.json();
+        const errorMessage = data.errors
+          ? data.errors.map((error) => error.message).join(", ")
+          : "An unknown error occurred.";
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
       return data.data;
     } catch (error) {
       console.error("Error updating profile:", error);
+      throw error;
     }
   }
 }
