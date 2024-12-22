@@ -6,6 +6,7 @@ import {
   createListingEvent,
   AddMediaUrlEvent,
 } from "./listing.js";
+import { updateAccountEvent } from "./account.js";
 
 export function initializeEvents() {
   registerEvent();
@@ -15,4 +16,5 @@ export function initializeEvents() {
   placeBidEvent();
   createListingEvent();
   AddMediaUrlEvent();
+  updateAccountEvent();
 }

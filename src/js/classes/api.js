@@ -165,4 +165,25 @@ export class API {
       console.error("Error fetching profile:", error);
     }
   }
+
+  //  update profile
+  async updateAccount(name) {
+    const url = new URL(this.baseURL);
+    const newUrl = new URL(`${url}/${name}`);
+
+    try {
+      const response = await fetch(newUrl, {
+        method: "PUT",
+        headers: headers(),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to update the profile");
+      }
+
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  }
 }
