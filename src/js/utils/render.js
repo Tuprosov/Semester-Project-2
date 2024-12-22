@@ -132,6 +132,7 @@ export function displaySingleListing(listing) {
       owner.href = "#";
       owner.style.pointerEvents = "none";
       watchlistBtn.style.display = "none";
+      showBids.disabled = true;
     }
   } else {
     owner.textContent = "Seller: Not available";
