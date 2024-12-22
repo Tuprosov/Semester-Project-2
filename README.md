@@ -17,14 +17,14 @@ Follow these steps to get the project up and running on your local machine:
 
 First, clone the repository to your local machine:
 
-git clone https://github.com/your-username/Semester-Project-2.git
+`git clone https://github.com/your-username/Semester-Project-2.git`
 
 Navigate to the project folder and install the necessary dependencies:
-cd Semester-Project-2
-npm install
+`cd Semester-Project-2`
+`npm install`
 
 To start the development server and watch for changes, use the following command:
-npm run dev
+`npm run dev`
 
 To create a production build with minified CSS, use:
-npm run build
+`npm run build`
