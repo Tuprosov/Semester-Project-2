@@ -2,6 +2,7 @@ import { Auth } from "../classes/auth.js";
 import { API } from "../classes/api.js";
 import { API_PROFILE_BASE } from "../constants.js";
 import { User } from "../classes/user.js";
+import { GITHUB_BASE } from "../constants.js";
 
 export async function onRegister(event) {
   event.preventDefault();
@@ -49,7 +50,7 @@ export async function onLogin(event) {
     loggedUser.saveToLocalStorage();
 
     // redirect to homepage
-    window.location.pathname = "/index.html";
+    window.location.pathname = `${GITHUB_BASE}/index.html`;
   } catch (error) {
     failureMessage.classList.remove("hidden");
     console.error(error.message);
