@@ -1,6 +1,6 @@
 import { Auth } from "../classes/auth.js";
 import { API } from "../classes/api.js";
-import { API_PROFILE_BASE } from "../constants.js";
+import { API_PROFILE_BASE, GITHUB_BASE } from "../constants.js";
 import { User } from "../classes/user.js";
 
 export async function onRegister(event) {
@@ -50,7 +50,7 @@ export async function onLogin(event) {
 
     // redirect to homepage
     console.log(window.location.href);
-    window.location.href = "/index.html";
+    window.location.href = `${GITHUB_BASE}/index.html`;
   } catch (error) {
     failureMessage.classList.remove("hidden");
     console.error(error.message);
@@ -61,5 +61,5 @@ export function onLogout(event) {
   event.preventDefault();
   Auth.logout();
   // redirect to homepage
-  window.location.href = "/index.html";
+  window.location.href = `${GITHUB_BASE}/index.html`;
 }
