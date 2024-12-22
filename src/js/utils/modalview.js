@@ -3,9 +3,9 @@ export function initializeModalWindow() {
   const changeAvatarBtn = document.getElementById("changeAvatarBtn");
   const avatarModal = document.getElementById("avatarModal");
   const cancelBtn = document.getElementById("cancelBtn");
-  const updateAvatarBtn = document.getElementById("updateAvatarBtn");
-  const avatarUrlInput = document.getElementById("avatarUrl");
   const overlay = document.getElementById("overlay");
+  const avatarUrl = document.getElementById("avatarUrl");
+  const message = document.getElementById("errorMessage");
   const body = document.body;
 
   changeAvatarBtn.addEventListener("click", () => {
@@ -21,6 +21,8 @@ export function initializeModalWindow() {
       avatarModal.classList.remove("active");
       overlay.classList.remove("active");
       body.classList.remove("modal-open");
+      avatarUrl.value = "";
+      message.classList.add("hidden");
     }
   });
 }
