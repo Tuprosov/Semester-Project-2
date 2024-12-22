@@ -3,6 +3,7 @@ import { API } from "../classes/api.js";
 import { API_PROFILE_BASE } from "../constants.js";
 import { checkStatus } from "./statusCheck.js";
 import { User } from "../classes/user.js";
+import { GITHUB_BASE } from "../constants.js";
 // import { GITHUB_BASE } from "../constants.js";
 
 export function displayListings(data) {
