@@ -12,8 +12,9 @@ import { GITHUB_BASE } from "./constants.js";
 
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
+    case `${GITHUB_BASE}/`:
     case `${GITHUB_BASE}/index.html`:
-      // case "/index.html":
+    case "/index.html":
       await loadListings();
       break;
     case `${GITHUB_BASE}/listing/index.html`:
