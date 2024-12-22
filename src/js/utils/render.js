@@ -226,6 +226,6 @@ export function displayAccount() {
   accountId.textContent = loggedUser.id ? loggedUser.id : "no ID";
   email.textContent = loggedUser.email;
   phone.textContent = loggedUser.phone ? loggedUser.phone : "no phone";
-  avatar.url = loggedUser.avatar;
+  avatar.src = loggedUser.avatar;
   avatar.alt = loggedUser.alt;
 }
