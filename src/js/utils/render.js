@@ -3,6 +3,7 @@ import { API } from "../classes/api.js";
 import { API_PROFILE_BASE } from "../constants.js";
 import { checkStatus } from "./statusCheck.js";
 import { User } from "../classes/user.js";
+import { GITHUB_BASE } from "../constants.js";
 
 export function displayListings(data) {
   const wrapper = document.getElementById("contentWrapper");
@@ -200,7 +201,7 @@ export function displayBidders() {
   bids.forEach((bid) => {
     const li = document.createElement("li");
     const a = document.createElement("a");
-    a.href = `/profile/index.html?name=${bid.bidder.name}`;
+    a.href = `../profile/index.html?name=${bid.bidder.name}`;
     a.textContent = `${bid.bidder.name} - ${bid.amount}`;
     a.className = "text-blue-600 hover:underline";
     // append it to container

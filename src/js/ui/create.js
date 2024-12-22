@@ -1,5 +1,6 @@
 import { API } from "../classes/api.js";
 import { API_BASE } from "../constants.js";
+import { GITHUB_BASE } from "../constants.js";
 
 export async function onCreate(event) {
   event.preventDefault();
@@ -42,7 +43,7 @@ export async function onCreate(event) {
       message.classList.remove("hidden");
       // redirect to listing
       if (newListing.data.id) {
-        window.location.href = `/listing/index.html?id=${newListing.data.id}`;
+        window.location.href = `../listing/index.html?id=${newListing.data.id}`;
       }
     } catch (error) {
       message.textContent = "Something went wrong, please try again";
