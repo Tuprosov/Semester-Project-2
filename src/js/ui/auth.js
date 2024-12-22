@@ -2,7 +2,6 @@ import { Auth } from "../classes/auth.js";
 import { API } from "../classes/api.js";
 import { API_PROFILE_BASE } from "../constants.js";
 import { User } from "../classes/user.js";
-// import { GITHUB_BASE } from "../constants.js";
 
 export async function onRegister(event) {
   event.preventDefault();
