@@ -25,8 +25,8 @@ export default async function router(pathname = window.location.pathname) {
     case "/profile/index.html":
       await displayProfile();
     case "/account/index.html":
-      displayAccount();
       fetchProfile();
+      displayAccount();
       initializeModalWindow();
     default:
       break;
