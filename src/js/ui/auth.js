@@ -49,6 +49,7 @@ export async function onLogin(event) {
     loggedUser.saveToLocalStorage();
 
     // redirect to homepage
+    console.log(window.location.href);
     window.location.href = "/index.html";
   } catch (error) {
     failureMessage.classList.remove("hidden");
