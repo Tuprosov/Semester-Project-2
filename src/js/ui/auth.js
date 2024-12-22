@@ -49,7 +49,7 @@ export async function onLogin(event) {
     loggedUser.saveToLocalStorage();
 
     // redirect to homepage
-    window.location.pathname = "../index.html";
+    window.location.href = "/index.html";
   } catch (error) {
     failureMessage.classList.remove("hidden");
     console.error(error.message);
@@ -60,5 +60,5 @@ export function onLogout(event) {
   event.preventDefault();
   Auth.logout();
   // redirect to homepage
-  window.location.pathname = "../index.html";
+  window.location.href = "/index.html";
 }
