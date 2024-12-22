@@ -7,6 +7,7 @@ import {
   displayAccount,
 } from "./utils/render.js";
 import { fetchProfile } from "./ui/account.js";
+import { initializeModalWindow } from "./utils/modalview.js";
 
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
@@ -26,6 +27,7 @@ export default async function router(pathname = window.location.pathname) {
     case "/account/index.html":
       displayAccount();
       fetchProfile();
+      initializeModalWindow();
     default:
       break;
   }
