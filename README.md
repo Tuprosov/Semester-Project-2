@@ -28,3 +28,5 @@ First, clone the repository to your local machine:
 
 ### 4. To create a production build with minified CSS, use:
 `npm run build`
+##P.s
+The project is completed to meet the requirements of the assignment and will be improved in the future :) 
