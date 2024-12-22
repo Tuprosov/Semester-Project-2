@@ -113,7 +113,7 @@ export function displaySingleListing(listing) {
 
   title.textContent = listing.title;
   desc.textContent = listing.description;
-  deadline.textContent = `Deadline: ${listing.endsAt}`;
+  deadline.textContent = listing.endsAt;
   showBids.textContent = Array.isArray(listing.bids) ? listing.bids.length : 0;
   showBids.disabled = listing.bids.length == 0 ? true : false;
   maxBid.textContent = `Current max bid: ${

@@ -30,6 +30,7 @@ export function toggleBidSection() {
   const bidInput = document.getElementById("bidInput");
   const placeBidBtn = document.getElementById("placeBidBtn");
   const bidMessage = document.getElementById("bidMessage");
+  const deadlineDate = document.getElementById("listingDeadline");
   if (!checkStatus()) {
     // Disable input and button
     bidInput.disabled = true;
@@ -50,6 +51,25 @@ export function toggleBidSection() {
       "hover:bg-gray-300"
     );
     placeBidBtn.classList.remove("hover:bg-blue-600");
+  } else {
+    const deadline = new Date(deadlineDate.textContent); // Convert text content to a Date object
+    const now = new Date();
+    if (deadline < now) {
+      bidMessage.textContent = "The listing has already ended!";
+      bidMessage.classList.remove("hidden");
+      bidInput.disabled = true;
+      placeBidBtn.disabled = true;
+      bidInput.classList.add(
+        "bg-gray-100",
+        "text-gray-500",
+        "cursor-not-allowed"
+      );
+      placeBidBtn.classList.add(
+        "bg-gray-300",
+        "cursor-not-allowed",
+        "hover:bg-gray-300"
+      );
+    }
   }
 }
 
