@@ -61,5 +61,5 @@ export function onLogout(event) {
   event.preventDefault();
   Auth.logout();
   // redirect to homepage
-  window.location.pathname = "/index.html";
+  window.location.pathname = `${GITHUB_BASE}/index.html`;
 }
