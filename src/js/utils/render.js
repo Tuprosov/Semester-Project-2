@@ -68,12 +68,8 @@ export function pagination(meta) {
   prevButton.className =
     "pagination-button py-2 px-4 rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition duration-300";
   prevButton.disabled = meta.isFirstPage;
-  prevButton.onclick = () => {
-    if (!meta.isLastPage) {
-      (async () => {
-        await loadListings(meta.previousPage);
-      })();
-    }
+  prevButton.onclick = async () => {
+    await loadListings(meta.previousPage);
   };
 
   // Next button
@@ -82,12 +78,8 @@ export function pagination(meta) {
   nextButton.className =
     "pagination-button py-2 px-4 rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition duration-300";
   nextButton.disabled = meta.isLastPage;
-  nextButton.onclick = () => {
-    if (!meta.isLastPage) {
-      (async () => {
-        await loadListings(meta.nextPage);
-      })();
-    }
+  nextButton.onclick = async () => {
+    await loadListings(meta.nextPage);
   };
 
   // Page info
