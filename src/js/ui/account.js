@@ -77,7 +77,7 @@ export async function onUpdateAccount() {
     // Refresh the page after the update
     location.reload();
   } catch (error) {
-    message.textContent = error;
+    message.textContent = error.message;
     message.classList.remove("hidden");
   }
 }

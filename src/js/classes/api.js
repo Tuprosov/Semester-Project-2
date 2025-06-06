@@ -195,7 +195,6 @@ export class API {
       const data = await response.json();
       return data.data;
     } catch (error) {
-      console.error("Error updating profile:", error);
       throw error;
     }
   }
