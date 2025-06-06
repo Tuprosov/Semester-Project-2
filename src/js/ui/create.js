@@ -26,9 +26,6 @@ export async function onCreate(event) {
   });
 
   data.media = validMedia;
-  //   invalidMedia.push(...mediaUrls.filter((url) => url.length > 300));
-  //   const validMedia = mediaUrls.filter((url) => url.length < 300);
-  //   data.media = validMedia.map((url) => ({ url: url, alt: "" }));
 
   if (invalidMedia.length > 0) {
     message.textContent = `Too long URL in input fields ${invalidMedia.join(

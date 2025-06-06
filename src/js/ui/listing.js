@@ -102,20 +102,20 @@ export async function makeBid() {
     // Call the API to place the bid
     try {
       const result = await api.placeBid(listingId, amount);
+      console.log(result);
       if (result) {
         const updatedUser = Object.assign(new User(), User.loggedUser);
         updatedUser.credits -= amount;
         updatedUser.saveToLocalStorage();
+        // Update the UI with a success message
+        bidMessage.textContent = "Your bid was placed successfully!";
+        bidMessage.classList.remove("hidden");
+        bidMessage.classList.add("text-green-500");
       }
     } catch (error) {
       bidMessage.textContent = error.message;
       bidMessage.classList.remove("hidden");
       bidMessage.classList.add("text-red-500");
     }
-
-    // Update the UI with a success message
-    bidMessage.textContent = "Your bid was placed successfully!";
-    bidMessage.classList.remove("hidden");
-    bidMessage.classList.add("text-green-500");
   }
 }
