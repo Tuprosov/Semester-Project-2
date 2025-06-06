@@ -16,14 +16,9 @@ export class Auth {
         throw new Error(`Registration failed: ${error.errors[0].message}`);
       }
 
-      const userData = await response.json();
-      return new User(
-        userData.data.name,
-        userData.data.email,
-        userData.data.avatar
-      );
+      const user = await response.json();
+      return new User(user.data.name, user.data.email, user.data.avatar);
     } catch (error) {
-      console.error("Error during registration:", error.message);
       throw error;
     }
   }
@@ -50,7 +45,6 @@ export class Auth {
         token
       );
     } catch (error) {
-      console.error("Error during login:", error.message);
       throw error;
     }
   }
