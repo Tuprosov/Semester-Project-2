@@ -91,36 +91,31 @@ export async function makeBid() {
   const urlParams = new URLSearchParams(window.location.search);
   const listingId = urlParams.get("id");
   const api = new API(API_BASE);
-
-  try {
-    const bidMessage = document.getElementById("bidMessage");
-    // Validate the bid amount before making the API call
-    if (!amount || isNaN(amount) || amount <= maxBid) {
-      bidMessage.textContent =
-        "Your bid must be higher than the current max bid!";
+  const bidMessage = document.getElementById("bidMessage");
+  // Validate the bid amount before making the API call
+  if (!amount || isNaN(amount) || amount <= maxBid) {
+    bidMessage.textContent =
+      "Your bid must be higher than the current max bid!";
+    bidMessage.classList.remove("hidden");
+    bidMessage.classList.add("text-red-500");
+  } else {
+    // Call the API to place the bid
+    try {
+      const result = await api.placeBid(listingId, amount);
+      if (result) {
+        const updatedUser = Object.assign(new User(), User.loggedUser);
+        updatedUser.credits -= amount;
+        updatedUser.saveToLocalStorage();
+      }
+    } catch (error) {
+      bidMessage.textContent = error.message;
       bidMessage.classList.remove("hidden");
       bidMessage.classList.add("text-red-500");
-    } else {
-      // Call the API to place the bid
-      try {
-        const result = await api.placeBid(listingId, amount);
-        if (result) {
-          const updatedUser = Object.assign(new User(), User.loggedUser);
-          updatedUser.credits -= amount;
-          updatedUser.saveToLocalStorage();
-        }
-      } catch (error) {
-        bidMessage.textContent = error.message;
-        bidMessage.classList.remove("hidden");
-        bidMessage.classList.add("text-red-500");
-      }
-
-      // Update the UI with a success message
-      bidMessage.textContent = "Your bid was placed successfully!";
-      bidMessage.classList.remove("hidden");
-      bidMessage.classList.add("text-green-500");
     }
-  } catch (error) {
-    console.error("Error placing bid:", error.message);
+
+    // Update the UI with a success message
+    bidMessage.textContent = "Your bid was placed successfully!";
+    bidMessage.classList.remove("hidden");
+    bidMessage.classList.add("text-green-500");
   }
 }
