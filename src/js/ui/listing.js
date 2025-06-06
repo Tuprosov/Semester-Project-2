@@ -13,9 +13,17 @@ export async function getClickedListing() {
 
   //   if true, fetch listing
   if (listingId) {
-    const data = await api.getListingById(listingId);
-    localStorage.setItem("current listing", JSON.stringify(data.data));
-    displaySingleListing(data.data);
+    try {
+      const data = await api.getListingById(listingId);
+      localStorage.setItem("current listing", JSON.stringify(data.data));
+      displaySingleListing(data.data);
+    } catch (error) {
+      container.innerHTML = `
+        <div class="flex items-center justify-center h-screen">
+          <p class="text-xl font-bold text-gray-600 animate-pulse">${error.message}. Try again later</p>
+        </div>
+      `;
+    }
   } else {
     container.innerHTML = `
         <div class="flex items-center justify-center h-screen">
@@ -94,12 +102,17 @@ export async function makeBid() {
       bidMessage.classList.add("text-red-500");
     } else {
       // Call the API to place the bid
-      const result = await api.placeBid(listingId, amount);
-      if (result) {
-        console.log("Bid placed successfully:", result);
-        const updatedUser = Object.assign(new User(), User.loggedUser);
-        updatedUser.credits -= amount;
-        updatedUser.saveToLocalStorage();
+      try {
+        const result = await api.placeBid(listingId, amount);
+        if (result) {
+          const updatedUser = Object.assign(new User(), User.loggedUser);
+          updatedUser.credits -= amount;
+          updatedUser.saveToLocalStorage();
+        }
+      } catch (error) {
+        bidMessage.textContent = error.message;
+        bidMessage.classList.remove("hidden");
+        bidMessage.classList.add("text-red-500");
       }
 
       // Update the UI with a success message

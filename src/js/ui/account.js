@@ -6,23 +6,28 @@ export async function fetchProfile() {
   const api = new API(API_PROFILE_BASE);
   const name = User.loggedUser.username;
   const token = JSON.parse(localStorage.getItem("token"));
-  const profile = await api.getProfile(name);
+  const heading = document.getElementById("h1");
+  try {
+    const profile = await api.getProfile(name);
+    // update loggeduser object with updated credits
+    const loggedUser = new User(
+      profile.name,
+      profile.email,
+      profile.avatar.url,
+      profile.avatar.alt,
+      token,
+      profile.credits,
+      profile.bio,
+      profile.listings,
+      profile.wins,
+      profile.bids,
+      profile.watchlist
+    );
 
-  // update loggeduser object with updated credits
-  const loggedUser = new User(
-    profile.name,
-    profile.email,
-    profile.avatar.url,
-    profile.avatar.alt,
-    token,
-    profile.credits,
-    profile.bio,
-    profile.listings,
-    profile.wins,
-    profile.bids,
-    profile.watchlist
-  );
-  loggedUser.saveToLocalStorage();
+    loggedUser.saveToLocalStorage();
+  } catch (error) {
+    heading.textContent = error.message;
+  }
 }
 
 export async function onUpdateAccount() {

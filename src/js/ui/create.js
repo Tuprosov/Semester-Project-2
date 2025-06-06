@@ -45,9 +45,8 @@ export async function onCreate(event) {
         window.location.href = `../listing/index.html?id=${newListing.data.id}`;
       }
     } catch (error) {
-      message.textContent = "Something went wrong, please try again";
+      message.textContent = error.message;
       message.classList.remove("hidden");
-      console.log(error.message);
     }
   }
 }
