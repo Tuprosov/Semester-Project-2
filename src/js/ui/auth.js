@@ -12,8 +12,10 @@ export async function onRegister(event) {
 
   try {
     await Auth.register(data);
+    failureMessage.classList.add("hidden");
     successMessage.classList.remove("hidden");
   } catch (error) {
+    failureMessage.textContent = error.message;
     failureMessage.classList.remove("hidden");
   }
 }
