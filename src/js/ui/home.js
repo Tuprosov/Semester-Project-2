@@ -48,6 +48,10 @@ export async function performSearch() {
       displayListings(searchResults.data);
     }
   } catch (error) {
-    alert("Something went wrong while searching. Please try again.", error);
+    wrapper.innerHTML = `
+          <div class="flex items-center justify-center h-screen">
+            <p class="text-xl font-bold text-gray-600 animate-pulse">${error.message}</p>
+          </div>
+        `;
   }
 }

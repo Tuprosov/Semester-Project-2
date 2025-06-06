@@ -11,11 +11,10 @@ export class API {
         `${this.baseURL}/search?q=${encodeURIComponent(query)}`
       );
       if (!response.ok) {
-        throw new Error(`Failed to fetch listings: ${response.statusText}`);
+        throw new Error("Search failed. Try again");
       }
       return await response.json();
     } catch (error) {
-      console.error("Error fetching search results:", error);
       throw error;
     }
   }
