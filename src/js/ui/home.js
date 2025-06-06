@@ -3,11 +3,17 @@ import { API_BASE } from "../constants.js";
 import { displayListings, pagination } from "../utils/render.js";
 
 export async function loadListings(page = 1) {
+  const heading = document.getElementById("h1");
   const api = new API(API_BASE);
   const limit = 12;
-  const listings = await api.getListings(limit, page);
-  displayListings(listings.data);
-  pagination(listings.meta);
+  try {
+    const listings = await api.getListings(limit, page);
+    heading.textContent = "Featured Active Auctions";
+    displayListings(listings.data);
+    pagination(listings.meta);
+  } catch (error) {
+    heading.textContent = error.message;
+  }
 }
 
 export async function performSearch() {

@@ -53,7 +53,7 @@ export class API {
         headers: headers(),
       });
       if (!response.ok) {
-        throw new Error("Failed to fetch listings");
+        throw new Error("Failed to fetch listings. Try again later");
       }
 
       const data = await response.json();
