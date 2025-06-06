@@ -11,12 +11,10 @@ export async function onRegister(event) {
   const failureMessage = document.getElementById("failure-message-reg");
 
   try {
-    const newUser = await Auth.register(data);
-    console.log("User registered:", newUser);
+    await Auth.register(data);
     successMessage.classList.remove("hidden");
   } catch (error) {
     failureMessage.classList.remove("hidden");
-    console.error(error.message);
   }
 }
 
@@ -53,7 +51,6 @@ export async function onLogin(event) {
     window.location.href = `${GITHUB_BASE}/index.html`;
   } catch (error) {
     failureMessage.classList.remove("hidden");
-    console.error(error.message);
   }
 }
 
