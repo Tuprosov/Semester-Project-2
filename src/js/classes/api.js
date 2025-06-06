@@ -29,13 +29,13 @@ export class API {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create listing");
+        const error = await response.json();
+        throw new Error(error.errors[0].message);
       }
 
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error creating listing:", error);
       throw error;
     }
   }
@@ -58,7 +58,7 @@ export class API {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error fetching listings:", error);
+      throw error;
     }
   }
 
@@ -81,7 +81,7 @@ export class API {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error fetching listing:", error);
+      throw error;
     }
   }
 
@@ -95,13 +95,16 @@ export class API {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update listing");
+        const error = await response.json();
+        throw new Error(
+          error?.errors[0].message || "Failed to update the listing. Try again"
+        );
       }
 
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error updating listing:", error);
+      throw error;
     }
   }
 
@@ -114,12 +117,16 @@ export class API {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to delete listing");
+        const error = await response.json();
+        throw new Error(
+          error?.errors[0].message ||
+            "Failed to delete the listing. Try again later"
+        );
       }
 
       return { message: "Listing deleted successfully" };
     } catch (error) {
-      console.error("Error deleting listing:", error);
+      throw error;
     }
   }
   //   place bid
@@ -133,12 +140,13 @@ export class API {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.errors.message || "Failed to place the bid.");
+        throw new Error(
+          errorData.errors[0].message || "Failed to place the bid. Try again"
+        );
       }
 
       return await response.json();
     } catch (error) {
-      console.error("Error placing bid:", error);
       throw error;
     }
   }
@@ -155,13 +163,13 @@ export class API {
         headers: headers(),
       });
       if (!response.ok) {
-        throw new Error("Failed to fetch the profile");
+        throw new Error("Failed to load profile");
       }
 
       const data = await response.json();
       return data.data;
     } catch (error) {
-      console.error("Error fetching profile:", error);
+      throw error;
     }
   }
 
