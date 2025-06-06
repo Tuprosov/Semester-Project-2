@@ -52,6 +52,7 @@ export async function onLogin(event) {
 
     window.location.href = `${GITHUB_BASE}/index.html`;
   } catch (error) {
+    failureMessage.textContent = error.message;
     failureMessage.classList.remove("hidden");
   }
 }
