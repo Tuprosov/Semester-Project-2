@@ -41,25 +41,36 @@ export class API {
   }
 
   // Get 12 listings
-  async getListings(limit = 12, page = 1) {
+  async getListings(limit = 12, page = 1, retries = 3, delay = 1000) {
     const url = new URL(this.baseURL);
     url.searchParams.append("limit", limit);
     url.searchParams.append("page", page);
     url.searchParams.append("_active", true);
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: headers(),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch listings. Try again later");
-      }
 
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      throw error;
-    }
+    const attemptFetch = async (remainingRetries, currentDelay) => {
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: headers(),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch listings. Try again later");
+        }
+
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        if (remainingRetries > 0) {
+          await new Promise((res) => setTimeout(res, currentDelay));
+          return attemptFetch(remainingRetries - 1, currentDelay * 2);
+        } else {
+          throw error;
+        }
+      }
+    };
+
+    return attemptFetch(retries, delay);
   }
 
   // Get a specific listing by ID
@@ -199,3 +210,24 @@ export class API {
     }
   }
 }
+
+// async getListings(limit = 12, page = 1) {
+//   const url = new URL(this.baseURL);
+//   url.searchParams.append("limit", limit);
+//   url.searchParams.append("page", page);
+//   url.searchParams.append("_active", true);
+//   try {
+//     const response = await fetch(url, {
+//       method: "GET",
+//       headers: headers(),
+//     });
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch listings. Try again later");
+//     }
+
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
