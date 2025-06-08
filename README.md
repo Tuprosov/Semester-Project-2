@@ -17,7 +17,7 @@ Follow these steps to get the project up and running on your local machine:
 
 First, clone the repository to your local machine:
 
-`git clone https://github.com/your-username/Semester-Project-2.git`
+`https://github.com/Tuprosov/Semester-Project-2.git`
 
 ### 2. Navigate to the project folder and install the necessary dependencies:
 `cd Semester-Project-2`
