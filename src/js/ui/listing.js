@@ -102,7 +102,6 @@ export async function makeBid() {
     // Call the API to place the bid
     try {
       const result = await api.placeBid(listingId, amount);
-      console.log(result);
       if (result) {
         const updatedUser = Object.assign(new User(), User.loggedUser);
         updatedUser.credits -= amount;
